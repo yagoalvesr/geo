@@ -22,20 +22,20 @@ public class CotacaoService {
 
     public static final String URL_BASE = "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/";
 
-    public Double recuperarCotacao() {
-
-        String diaAtual = DataUtil.recuperarDiaAtual();
-
-        RestTemplate restTemplate = new RestTemplate();
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(URL_BASE);
-        sb.append("CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='");
-        sb.append(diaAtual);
-        sb.append("'&$format=json");
-
-        String url = sb.toString();
-        ResponseEntity<Cotacao> response = restTemplate.getForEntity(url, Cotacao.class);
-        return response.getBody().getValue().get(0).getCotacaoCompra();
-    }
+//    public Double recuperarCotacao() {
+//
+//        String diaAtual = DataUtil.recuperarDiaAtual();
+//
+//        RestTemplate restTemplate = new RestTemplate();
+//        StringBuilder sb = new StringBuilder();
+//
+//        sb.append(URL_BASE);
+//        sb.append("CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='");
+//        sb.append(diaAtual);
+//        sb.append("'&$format=json");
+//
+//        String url = sb.toString();
+//        ResponseEntity<Cotacao> response = restTemplate.getForEntity(url, Cotacao.class);
+//        return response.getBody().getValue().get(0).getCotacaoCompra();
+//    }
 }

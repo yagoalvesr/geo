@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "estados")
+@RequestMapping(value = "/estados")
 public class EstadoController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class EstadoController {
         return ResponseEntity.ok().body(estadoDTOList);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity recuperarEstadoPorId(@PathVariable Integer id) throws GeoException {
         try {
             EstadoDTO estadoDTO = estadoService.recuperarEstadoPorId(id);

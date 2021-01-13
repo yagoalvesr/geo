@@ -39,7 +39,7 @@ public class EstadoService {
                     .stream()
                     .map(estado -> {
                         EstadoDTO estadoDTO = estadoMapper.toDTO(estado);
-                        recuperarCustoPopulacional(estadoDTO);
+//                        recuperarCustoPopulacional(estadoDTO);
                         return estadoDTO;
                     })
                     .collect(Collectors.toList());
@@ -54,7 +54,7 @@ public class EstadoService {
 
         if (estado.isPresent()) {
             estadoDTO = estadoMapper.toDTO(estado.get());
-            recuperarCustoPopulacional(estadoDTO);
+//            recuperarCustoPopulacional(estadoDTO);
         } else {
             throw new GeoException("Não foi possível encontrar esse estado");
         }
@@ -71,10 +71,10 @@ public class EstadoService {
         }
     }
 
-    private void recuperarCustoPopulacional(EstadoDTO estadoDTO) {
-        Double custoPopulacinonal = custoPopulacionalService.recuperaCustoPopulacional(estadoDTO.getQtdPopulacao());
-        Double cotacaoAtual = cotacaoService.recuperarCotacao();
-        Double custoPopulacionalCovertido = custoPopulacinonal * cotacaoAtual;
-        estadoDTO.setCustoPopulacional(new BigDecimal(custoPopulacionalCovertido));
-    }
+//    private void recuperarCustoPopulacional(EstadoDTO estadoDTO) {
+//        Double custoPopulacinonal = custoPopulacionalService.recuperaCustoPopulacional(estadoDTO.getQtdPopulacao());
+//        Double cotacaoAtual = cotacaoService.recuperarCotacao();
+//        Double custoPopulacionalCovertido = custoPopulacinonal * cotacaoAtual;
+//        estadoDTO.setCustoPopulacional(new BigDecimal(custoPopulacionalCovertido));
+//    }
 }

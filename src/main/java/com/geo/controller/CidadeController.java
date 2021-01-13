@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "cidades")
+@RequestMapping(value = "/cidades")
 public class CidadeController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class CidadeController {
         return ResponseEntity.ok().body(cidadeDTOList);
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity recuperarCidadePorId(@PathVariable Integer id) throws GeoException {
         try {
             CidadeDTO cidadeDTO = cidadeService.recuperarCidadePorId(id);
@@ -43,13 +43,13 @@ public class CidadeController {
         }
     }
 
-    @RequestMapping(value = "inserir-cidades", method = RequestMethod.POST)
+    @RequestMapping(value = "/inserir-cidades", method = RequestMethod.POST)
     public ResponseEntity<String> inserirCidadeList(@RequestBody List<CidadeDTO> cidadeDTOList) {
         cidadeService.inserirCidadeList(cidadeDTOList);
         return ResponseEntity.ok().body("Cidades inseridas com sucesso!");
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deletarCidadePorId(@PathVariable Integer id) throws GeoException {
         try {
             cidadeService.deletarCidade(id);
