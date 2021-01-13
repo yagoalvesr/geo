@@ -8,6 +8,8 @@ import com.geo.dto.CidadeDTO;
 import com.geo.exception.GeoException;
 import com.geo.mapper.CidadeMapper;
 import com.geo.repository.CidadeDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,22 +22,25 @@ import java.util.stream.Collectors;
 @Service
 public class CotacaoService {
 
+    Logger logger = LogManager.getLogger(CotacaoService.class);
+
     public static final String URL_BASE = "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/";
 
-//    public Double recuperarCotacao() {
-//
-//        String diaAtual = DataUtil.recuperarDiaAtual();
-//
-//        RestTemplate restTemplate = new RestTemplate();
-//        StringBuilder sb = new StringBuilder();
-//
-//        sb.append(URL_BASE);
-//        sb.append("CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='");
-//        sb.append(diaAtual);
-//        sb.append("'&$format=json");
-//
-//        String url = sb.toString();
-//        ResponseEntity<Cotacao> response = restTemplate.getForEntity(url, Cotacao.class);
-//        return response.getBody().getValue().get(0).getCotacaoCompra();
-//    }
+    public Double recuperarCotacao() {
+
+        String diaAtual = DataUtil.recuperarDiaAtual();
+
+        RestTemplate restTemplate = new RestTemplate();
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(URL_BASE);
+        sb.append("CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='");
+        sb.append(diaAtual);
+        sb.append("'&$format=json");
+
+        String url = sb.toString();
+        logger.info(url);
+        ResponseEntity<Cotacao> response = restTemplate.getForEntity(url, Cotacao.class);
+        return response.getBody().getValue().get(0).getCotacaoCompra();
+    }
 }
