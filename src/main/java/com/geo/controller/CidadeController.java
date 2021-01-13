@@ -2,6 +2,7 @@ package com.geo.controller;
 
 import com.geo.domain.Cidade;
 import com.geo.dto.CidadeDTO;
+import com.geo.dto.RetornoDTO;
 import com.geo.exception.GeoException;
 import com.geo.service.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,26 +35,29 @@ public class CidadeController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<String> inserirCidade(@RequestBody CidadeDTO cidadeDTO) throws GeoException {
+    public ResponseEntity inserirCidade(@RequestBody CidadeDTO cidadeDTO) throws GeoException {
         try {
             cidadeService.inserirCidade(cidadeDTO);
-            return ResponseEntity.ok().body("Cidade inserida com sucesso!");
+            RetornoDTO retornoDTO = new RetornoDTO("Cidade inserida com sucesso!", true);
+            return ResponseEntity.ok().body(retornoDTO);
         } catch (GeoException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @RequestMapping(value = "/inserir-cidades", method = RequestMethod.POST)
-    public ResponseEntity<String> inserirCidadeList(@RequestBody List<CidadeDTO> cidadeDTOList) {
+    public ResponseEntity<RetornoDTO> inserirCidadeList(@RequestBody List<CidadeDTO> cidadeDTOList) {
         cidadeService.inserirCidadeList(cidadeDTOList);
-        return ResponseEntity.ok().body("Cidades inseridas com sucesso!");
+        RetornoDTO retornoDTO = new RetornoDTO("Cidades inseridas com sucesso!", true);
+        return ResponseEntity.ok().body(retornoDTO);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deletarCidadePorId(@PathVariable Integer id) throws GeoException {
+    public ResponseEntity deletarCidadePorId(@PathVariable Integer id) throws GeoException {
         try {
             cidadeService.deletarCidade(id);
-            return ResponseEntity.ok().body("Cidade deletada com sucesso!");
+            RetornoDTO retornoDTO = new RetornoDTO("Cidade deletada com sucesso!", true);
+            return ResponseEntity.ok().body(retornoDTO);
         } catch (GeoException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
