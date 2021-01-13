@@ -2,18 +2,18 @@ package com.geo.Util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.util.GregorianCalendar;
 
 public class DataUtil {
 
     public static String recuperarDiaAtual() {
 
-//        Calendar cal = Calendar.getInstance();
-//        cal.add(Calendar.DATE, 1);
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy", new Locale("pt", "Br"));
-        String diaAtual = sdf.format(date);
+        SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+
+        Calendar gc = Calendar.getInstance();
+
+        gc.add((GregorianCalendar.DAY_OF_MONTH), -1);
+        String diaAtual = df.format(gc.getTime());
 
         return diaAtual;
     }
